@@ -2,8 +2,6 @@
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="my-x-custom.html">
 
-
-
 <dom-module id="my-new-view">
     <!-- Defines the element's style and local DOM -->
     <template>
@@ -17,7 +15,15 @@
 
         <h1>New view</h1>
         <paper-slider min="-100" max="100" value="50"></paper-slider>
-        <my-x-custom user="Scott" manager></my-x-custom>
+        <!--<my-x-custom user="Scott" manager></my-x-custom>-->
+        Hello World from <span id="name"></span>!
+        <header>Local dom header followed by distributed dom.</header>
+        <!--<content select=".content"></content>-->
+        <p class="special-paragraph">...</p>
+
+        <footer>Footer after distributed dom.</footer>
+
+        <my-x-custom class="light-dom">  <p class="line">Moved line 1</p></my-x-custom>
     </template>
     <!-- Creates the element's prototype and registers it -->
     <script>
@@ -31,7 +37,19 @@
             },
 
             ready: function() {
+                p = document.createElement('p');
+                p.appendChild(   document.createTextNode('text')   );
+                p.className = 'line';
+                Polymer.dom( OT ).appendChild( p );
+                p = document.createElement('p');
+                p.appendChild(   document.createTextNode('text')   );
+                Polymer.dom( OT ).appendChild( p );
+                p.className = 'line';
+
+               console.log(this.$$('.light-dom').textContent);
+
                 console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+                this.$.name.textContent = this.tagName;
             },
 
             attached: function() {
