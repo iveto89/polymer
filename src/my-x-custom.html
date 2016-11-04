@@ -1,0 +1,71 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="my-x-custom">
+
+    <!--<template>-->
+        <!--My name is <span>{{fullName}}</span>-->
+    <!--</template>-->
+
+    <script>
+        Polymer({
+
+            is: 'my-x-custom',
+
+            properties: {
+
+                first: String,
+
+                last: String,
+
+                fullName: {
+                    type: String,
+                    computed: 'computeFullName(first, last)'
+                },
+
+                user: {
+                    type: String,
+                    value: 'Iva'
+                },
+                manager: {
+                    type: Boolean,
+                    notify: true,
+                    value: 1
+                },
+                data: {
+                    type: Object,
+                    notify: true,
+                    value: function() {
+                        return {"company":"Google"};
+                    }
+                },
+                response: {
+                    type: Object,
+                    reflectToAttribute: true
+                }
+            },
+            responseHandler: function(response) {
+                this.response = 'loaded';
+                // results in this.setAttribute('response', 'loaded');
+            },
+
+            computeFullName: function(first, last) {
+                return first + ' ' + last;
+            },
+            ready: function() {
+                this.textContent = 'Hello World, I am a Custom Element!';
+            },
+            attached: function() {
+                // render
+                this.textContent = 'Hello World, my user is ' + (this.user || 'nobody') + '.\n' +
+                    'This user is ' + (this.manager ? '' : 'not') + ' a manager in ' + this.data.company + ' company.';
+            }
+
+        });
+
+
+    </script>
+
+
+
+</dom-module>
+

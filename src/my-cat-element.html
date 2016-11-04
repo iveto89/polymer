@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="my-cat-element">
+    <template>
+        <style>
+            div {
+                width:50px;
+                height:50px;
+                background-color:red;
+            }
+        </style>
+        <div id="myDiv">
+
+        </div>
+    </template>
+
+    <script>
+
+        Polymer({
+            is: 'my-cat-element',
+            _says: 'meow',
+            speak: function() {
+                console.log(this._says);
+                return this._says;
+            },
+            attached: function() {
+//                this.translate3d('100px', '100px', '100px');
+                this.transform('rotateX(120deg)', this.$.myDiv);
+
+            },
+            created: function() {
+//                this.importHref('/src/my-new-view.html', function(e) {
+//                    // e.target.import is the import document.
+//                    console.log(e.target.import);
+//                }, function(e) {
+//                    // loading error
+//                });
+                var resolvedPageUrl = this.resolveUrl('my-x-custom.html');
+                this.importHref(resolvedPageUrl, null, false, true);
+            }
+        });
+
+
+
+    </script>
+
+</dom-module>
+
+<script>
+
+//            var cat1 = document.querySelector('my-cat-element');
+//            cat1.speak();
+    var cat2 = document.createElement('my-cat-element');
+    cat2.speak();
+</script>
