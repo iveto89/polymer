@@ -8,7 +8,20 @@
             <paper-input value="{{message}}"></paper-input>
             [[message]]
             <div>{{task.text}}</div>
-            <input value="{{message::input}}"/>
+            <div style$="{{textStyle}}">
+                <input value="{{message::input}}"/>
+            </div>
+
+            <input type="checkbox" checked$="{{messageChecked}}">
+            <div style$="{{messageStyle}}">
+                <div class$="{{messageClass}}">
+                    <a href$="{{messageUrl}}">
+                        <label for$="{{messageLabel}}">Label</label>
+                            <div data-bar$="{{messageLabel}}">Data-bar</div>
+                    </a>
+                </div>
+            </div>
+
         </template>
     </dom-module>
     <script>
@@ -43,6 +56,31 @@
                     type: Boolean,
                     value: true,
                     reflectToAttribute: true
+                },
+
+                messageClass: {
+                    type: String,
+                    value: "m-class"
+                },
+                messageChecked: {
+                    type: Boolean,
+                    value: true
+                },
+                messageUrl:{
+                    stype: String,
+                    value: "http://pluralsight.com"
+                },
+                messageStyle:{
+                    type: String,
+                    value: 'background-color: #efefef;'
+                },
+                messageLabel:{
+                    type: String,
+                    value: "message-label"
+                },
+                textStyle: {
+                    type: String,
+                    value: 'width:100%;'
                 }
             },
             ready: function() {
