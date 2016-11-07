@@ -1,7 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="my-x-custom.html">
+<body>
 
+</body>
 <dom-module id="my-new-view">
     <!-- Defines the element's style and local DOM -->
     <template>
@@ -41,15 +43,38 @@
                 p.appendChild(   document.createTextNode('text')   );
                 p.className = 'line';
                 Polymer.dom( OT ).appendChild( p );
+
                 p = document.createElement('p');
-                p.appendChild(   document.createTextNode('text')   );
+                p.appendChild(   document.createTextNode('text2')   );
                 Polymer.dom( OT ).appendChild( p );
+
                 p.className = 'line';
 
-               console.log(this.$$('.light-dom').textContent);
+                console.log('dynamic node content is ', this.$$('.light-dom').textContent);
+                console.log('dynamic node content is ', Polymer.dom(this.root).querySelector('.light-dom').textContent);
 
                 console.log(this.localName + '#' + this.id + ' has local DOM initialized');
                 this.$.name.textContent = this.tagName;
+                console.log(this.$.name.textContent);
+                console.log('polymer ', Polymer.dom(this));
+                var elem = Polymer.dom(Polymer.dom(this).root);
+                console.log('parent children', Polymer.dom(OT).children);
+                console.log('parent childNodes', Polymer.dom(OT).childNodes);
+                console.log('node parent', Polymer.dom(this).parentNode);
+                console.log('node first child', Polymer.dom(this).firstChild);
+                console.log('node last child', Polymer.dom(this).lastChild);
+                console.log('node first element child', Polymer.dom(this).firstElementChild);
+                console.log('node last element child', Polymer.dom(this).lastElementChild);
+                console.log('node previous sibling', Polymer.dom(this).previousSibling);
+                console.log('node next sibling', Polymer.dom(this).nextSibling);
+                console.log('node text content', Polymer.dom(this).textContent);
+                console.log('node inner html', Polymer.dom(this).innerHTML);
+                console.log(Polymer.dom(OT).querySelector('.line'));
+                Polymer.dom(this).setAttribute('newAttribute', 'new val');
+                console.log('newAttribute value is ',  this.getAttribute('newAttribute'));
+                console.log('class list ', Polymer.dom(this).classList);
+                OT.distributeContent(); //to update attribute changes
+
             },
 
             attached: function() {
@@ -71,3 +96,4 @@
 
 
 </dom-module>
+<my-new-view><span>First child</span><div>Last child</div></my-new-view>

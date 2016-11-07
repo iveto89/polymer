@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<head>
+
+    <script>
+
+        MyHelloInput = Polymer({
+            is: 'my-hello-element',
+            extends: 'input',
+            created: function () {
+                this.value = "hello there";
+
+            }
+        });
+
+        var el1 = new MyHelloInput();
+        console.log(el1 instanceof HTMLInputElement);
+        document.querySelector("body").appendChild(el1);
+
+        var el2 = document.createElement('input', 'my-hello-element');
+        console.log(el2 instanceof HTMLInputElement);
+        document.querySelector("body").appendChild(el2);
+
+
+    </script>
+
+</head>
+<body>
+ <input type="text" is="my-hello-element"/>
+</body>
